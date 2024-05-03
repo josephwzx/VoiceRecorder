@@ -2,12 +2,15 @@ from flask import Flask, request, send_from_directory, jsonify
 from werkzeug.utils import secure_filename
 from werkzeug.exceptions import NotFound
 import os
+from flask_cors import CORS
 
 upload_folder = 'uploads'
-os.makedirs(upload_folder, exist_ok=True)  # Ensure the upload folder exists
+os.makedirs(upload_folder, exist_ok=True)
 
 def create_app(test_config=None, upload_folder=upload_folder):
     app = Flask(__name__)
+    CORS(app, supports_credentials=True)
+    
     if test_config:
         app.config.update(test_config)
 
