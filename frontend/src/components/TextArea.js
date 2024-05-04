@@ -1,5 +1,4 @@
 import React from 'react';
-import { Textarea } from '@material-tailwind/react';
 
 function TextArea({ recordingStatus, recordingTime }) {
   const displayText = recordingStatus.includes("Recording")
