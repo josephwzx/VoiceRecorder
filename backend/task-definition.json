@@ -1,0 +1,57 @@
+{
+    "family": "voice-recorder",
+    "executionRoleArn": "arn:aws:iam::975050244208:role/ecsTaskExecutionRole",
+    "containerDefinitions": [
+        {
+            "name": "voice-recorder",
+            "image": "975050244208.dkr.ecr.us-east-2.amazonaws.com/voice-recorder:latest",
+            "cpu": 256,
+            "memory": 512,
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": 5000,
+                    "hostPort": 5000
+                }
+            ],
+            "mountPoints": [
+                {
+                    "sourceVolume": "voiceUploads",
+                    "containerPath": "/app/uploads"
+                }
+            ],
+            "environment": [
+                {
+                    "name": "ENV_VAR_NAME",
+                    "value": "value"
+                }
+            ],
+            "command": [
+                "gunicorn", "-b", "0.0.0.0:5000", "app:create_app()"
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/voice-recorder",
+                    "awslogs-region": "us-east-2",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
+        }
+    ],
+    "volumes": [
+        {
+            "name": "voiceUploads"
+        }
+    ],
+    "requiresCompatibilities": ["FARGATE"],
+    "networkMode": "awsvpc",
+    "cpu": "512",
+    "memory": "1024",
+    "tags": [
+        {
+            "key": "Name",
+            "value": "voice-recorder"
+        }
+    ]
+}

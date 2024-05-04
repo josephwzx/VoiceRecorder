@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voice-recorder-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: voice-recorder
+  template:
+    metadata:
+      labels:
+        app: voice-recorder
+    spec:
+      containers:
+      - name: voice-recorder-container
+        image: 975050244208.dkr.ecr.us-west-1.amazonaws.com/voice-recorder:latest
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+        - name: uploads-volume
+          mountPath: /app/uploads
+      volumes:
+      - name: uploads-volume
+        emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: voice-recorder-service
+spec:
+  selector:
+    app: voice-recorder
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: LoadBalancer

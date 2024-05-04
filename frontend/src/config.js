@@ -1,5 +1,5 @@
 const dev = {
-    API_URL: 'http://127.0.0.1:5000',
+    API_URL: 'http://a1f6946efd5304f7db5f33a15e10bbef-1209942196.us-east-2.elb.amazonaws.com:80',
 };
 
 const prod = {
