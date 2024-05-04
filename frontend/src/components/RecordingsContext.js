@@ -19,7 +19,7 @@ export const RecordingsProvider = ({ children }) => {
                            .replace('.wav', '')
                            .replace('T', ' ')
                            .substring(0, 19)
-                           .replace(/-/g, (match, offset) => offset === 13 ? ':' : '-')
+                           .replace(/-/g, (match, offset) => offset === 13 || offset === 16 ? ':' : '-')
             })));
         } else {
             console.error('Failed to fetch recordings');

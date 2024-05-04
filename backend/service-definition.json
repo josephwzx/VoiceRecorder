@@ -1,14 +1,13 @@
 {
     "serviceName": "voice-recorder-service",
     "taskDefinition": "voice-recorder",
-    "desiredCount": 2,
+    "desiredCount": 1,
     "cluster": "voice-recorder-cluster",
     "launchType": "FARGATE",
     "networkConfiguration": {
         "awsvpcConfiguration": {
             "subnets": [
-                "subnet-0dff6ccab216bce98",
-                "subnet-013693c629bf249a3"
+                "subnet-0dff6ccab216bce98"
             ],
             "securityGroups": [
                 "sg-04cd802187be9e021"

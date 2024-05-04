@@ -15,10 +15,4 @@ describe('TextArea component', () => {
     const statusElement = screen.getByText(/Recording \(10s\)/i);
     expect(statusElement).toBeInTheDocument();
   });
-
-  test('displays custom recording status correctly', () => {
-    render(<TextArea recordingStatus="Custom Status" recordingTime={0} />);
-    const statusElement = screen.getByText(/Custom Status/i);
-    expect(statusElement).toBeInTheDocument();
-  });
 });

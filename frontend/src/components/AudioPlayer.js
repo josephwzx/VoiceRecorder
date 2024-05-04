@@ -15,7 +15,7 @@ function AudioPlayer() {
         <div key={index} className="mt-4">
           <p>Recording time: {recording.timestamp}</p>
           <div className="flex items-center">
-            <audio controls src={recording.audioUrl} className="mr-4" />
+            <audio controls src={recording.audioUrl} className="mr-4" data-testid="audio-element"/>
             <IconButton
               onClick={() => deleteRecording(recording.filename)}
               aria-label="Delete recording"
