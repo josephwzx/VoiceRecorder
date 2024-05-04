@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRecordings } from './RecordingsContext';
+import { IconButton } from '@material-tailwind/react';
 
-function AudioPlayer({ recordings }) {
+function AudioPlayer() {
+  const { recordings, fetchRecordings, deleteRecording } = useRecordings();
+
+  useEffect(() => {
+      fetchRecordings();
+  }, []);
+
   return (
     <div>
       {recordings.map((recording, index) => (
-        <div key={index} className="mt-2">
-          <p>Recording {index + 1}</p>
-          <audio controls src={recording.audioUrl} />
+        <div key={index} className="mt-4">
+          <p>Recording time: {recording.timestamp}</p>
+          <div className="flex items-center">
+            <audio controls src={recording.audioUrl} className="mr-4" />
+            <IconButton
+              onClick={() => deleteRecording(recording.filename)}
+              aria-label="Delete recording"
+            >
+              <i className="fas fa-trash" />
+            </IconButton>
+          </div>
         </div>
       ))}
     </div>

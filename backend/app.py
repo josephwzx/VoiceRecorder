@@ -43,9 +43,13 @@ def create_app(test_config=None, upload_folder=upload_folder):
     @app.route('/api/recordings/<filename>', methods=['GET'])
     def get_recording(filename):
         try:
-            return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+            safe_filename = secure_filename(filename)
+            return send_from_directory(upload_folder, safe_filename)
         except NotFound:
             return jsonify({'error': 'File not found'}), 404
+        except Exception as e:
+            print("Error serving file:", str(e))
+            return jsonify({'error': 'Internal Server Error', 'details': str(e)}), 500
 
     @app.route('/api/recordings/<filename>', methods=['DELETE'])
     def delete_recording(filename):
